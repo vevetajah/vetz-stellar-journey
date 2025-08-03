@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // Sample gallery items - in a real app, these would come from props or API
 const galleryItems = [
@@ -21,6 +21,42 @@ const categories = ['All', 'AI', 'Frontend', 'Mobile', 'Backend'];
 export const PhotoGallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    const scrollSpeed = 1; // pixels per frame
+    let animationId: number;
+
+    const autoScroll = () => {
+      if (scrollContainer) {
+        scrollContainer.scrollLeft += scrollSpeed;
+        
+        // Reset scroll when reaching the end
+        if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
+          scrollContainer.scrollLeft = 0;
+        }
+      }
+      animationId = requestAnimationFrame(autoScroll);
+    };
+
+    animationId = requestAnimationFrame(autoScroll);
+
+    // Pause on hover
+    const handleMouseEnter = () => cancelAnimationFrame(animationId);
+    const handleMouseLeave = () => animationId = requestAnimationFrame(autoScroll);
+
+    scrollContainer.addEventListener('mouseenter', handleMouseEnter);
+    scrollContainer.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      scrollContainer.removeEventListener('mouseenter', handleMouseEnter);
+      scrollContainer.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
 
   const filteredItems = selectedCategory === 'All' 
     ? galleryItems 
@@ -62,8 +98,8 @@ export const PhotoGallery = () => {
           <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
           
           {/* Scrollable Container */}
-          <div className="overflow-x-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary/30">
-            <div className="flex gap-4 pb-4 px-4" style={{ width: 'max-content' }}>
+          <div ref={scrollRef} className="overflow-x-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary/30">
+            <div className="flex gap-4 pb-4 px-4" style={{ width: `${filteredItems.length * 280}px` }}>
               {filteredItems.map((item, index) => (
                 <div
                   key={item.id}
@@ -134,8 +170,8 @@ export const PhotoGallery = () => {
         {/* Scroll Hint */}
         <div className="text-center mt-8">
           <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
-            <span>Scroll horizontally to explore more projects</span>
-            <span className="animate-pulse">→</span>
+            <span>Auto-scrolling gallery • Hover to pause</span>
+            <span className="animate-pulse">←</span>
           </p>
         </div>
       </div>

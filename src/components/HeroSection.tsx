@@ -2,21 +2,39 @@ import { useEffect, useState } from 'react';
 
 export const HeroSection = () => {
   const [displayText, setDisplayText] = useState('');
-  const fullText = "Hi, I'm Vetz — Fullstack Developer | Mobile Developer | Next AI Engineer";
+  const [currentNameIndex, setCurrentNameIndex] = useState(0);
+  const names = ["Hi, I'm Vetz", "Hi, I'm humbeguy"];
+  const roleText = "— Fullstack Developer | Mobile Developer | Next AI Engineer";
 
   useEffect(() => {
     let index = 0;
+    let isDeleting = false;
+    const currentName = names[currentNameIndex];
+    
     const timer = setInterval(() => {
-      if (index < fullText.length) {
-        setDisplayText(fullText.slice(0, index + 1));
-        index++;
+      if (!isDeleting) {
+        if (index < currentName.length) {
+          setDisplayText(currentName.slice(0, index + 1));
+          index++;
+        } else {
+          setTimeout(() => {
+            isDeleting = true;
+          }, 2000);
+        }
       } else {
-        clearInterval(timer);
+        if (index > 0) {
+          setDisplayText(currentName.slice(0, index - 1));
+          index--;
+        } else {
+          isDeleting = false;
+          setCurrentNameIndex((prev) => (prev + 1) % names.length);
+          clearInterval(timer);
+        }
       }
-    }, 100);
+    }, isDeleting ? 50 : 100);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [currentNameIndex]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -31,13 +49,15 @@ export const HeroSection = () => {
       {/* Main Content */}
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
         <div className="relative">
-          <h1 
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight glitch"
-            data-text={displayText}
-          >
-            <span className="text-gradient">{displayText}</span>
-            <span className="animate-pulse text-primary">|</span>
-          </h1>
+          <div className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
+            <h1 className="bg-gradient-to-r from-cyan-400 to-orange-400 bg-clip-text text-transparent">
+              {displayText}
+              <span className="animate-pulse text-primary">|</span>
+            </h1>
+          </div>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-8 bg-gradient-to-r from-cyan-400 to-orange-400 bg-clip-text text-transparent">
+            {roleText}
+          </h2>
           
           {/* Decorative Elements */}
           <div className="absolute -top-10 -left-10 w-4 h-4 bg-primary rounded-full animate-pulse-glow" />

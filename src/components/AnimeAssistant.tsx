@@ -49,7 +49,7 @@ export const AnimeAssistant = () => {
   };
 
   return (
-    <div className="fixed bottom-8 left-8 z-50">
+    <div className="fixed bottom-8 left-20 z-50">
       {/* Speech Bubble */}
       {showBubble && (
         <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 animate-fade-in">
