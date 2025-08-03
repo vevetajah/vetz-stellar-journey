@@ -6,8 +6,11 @@ import { SkillGalaxy } from '@/components/SkillGalaxy';
 import { AISection } from '@/components/AISection';
 import { QuoteWall } from '@/components/QuoteWall';
 import { PhotoGallery } from '@/components/PhotoGallery';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 const Index = () => {
+  useScrollReveal();
+  
   return (
     <div className="min-h-screen bg-background text-foreground dark">
       {/* Background Elements */}

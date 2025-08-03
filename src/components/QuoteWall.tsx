@@ -65,7 +65,7 @@ export const QuoteWall = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 scroll-reveal">
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gradient">
             Wisdom Archive
           </h2>

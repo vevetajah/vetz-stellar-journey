@@ -30,12 +30,19 @@ export const NavigationButtons = () => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const handleNavClick = (action: string) => {
+  const handleNavClick = (action: string, event?: React.MouseEvent<HTMLButtonElement>) => {
     const element = document.getElementById(action);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsExpanded(false);
+    
+    // Add visual feedback
+    const button = event?.currentTarget as HTMLButtonElement;
+    if (button) {
+      button.classList.add('animate-bounce-in');
+      setTimeout(() => button.classList.remove('animate-bounce-in'), 600);
+    }
   };
 
   const handleSocialClick = (href: string) => {
@@ -57,13 +64,14 @@ export const NavigationButtons = () => {
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <button
-                  onClick={() => handleNavClick(item.action)}
+                  onClick={(e) => handleNavClick(item.action, e)}
                   onMouseEnter={() => setHoveredItem(item.action)}
                   onMouseLeave={() => setHoveredItem(null)}
                   className="w-12 h-12 rounded-full bg-card/80 backdrop-blur-sm border border-primary/30 
                              flex items-center justify-center text-primary hover:text-primary-foreground
-                             transition-all duration-300 hover:scale-110 hover:bg-primary/80 glow-blue
-                             hover:shadow-[0_0_30px_hsl(200_100%_65%/0.6)] animate-fade-in"
+                             transition-all duration-500 hover:scale-125 hover:bg-primary/80 glow-blue
+                             hover:shadow-[0_0_40px_hsl(200_100%_65%/0.8)] animate-fade-in
+                             active:scale-95 active:animate-bounce-in"
                 >
                   <item.icon size={20} />
                 </button>

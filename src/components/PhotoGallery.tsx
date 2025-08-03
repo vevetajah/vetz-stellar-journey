@@ -65,7 +65,7 @@ export const PhotoGallery = () => {
   return (
     <section className="relative py-20 bg-card/20">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 scroll-reveal">
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gradient">
             Project Gallery
           </h2>
@@ -92,7 +92,7 @@ export const PhotoGallery = () => {
         </div>
 
         {/* Horizontal Scrolling Gallery */}
-        <div className="relative">
+        <div className="relative scroll-reveal" style={{ animationDelay: '0.3s' }}>
           {/* Gradient Edges */}
           <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />

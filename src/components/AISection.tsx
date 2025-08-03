@@ -49,7 +49,7 @@ export const AISection = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 scroll-reveal">
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gradient">
             AI Development
           </h2>
@@ -65,7 +65,7 @@ export const AISection = () => {
               key={category.title}
               className="group relative p-6 rounded-2xl bg-card/40 backdrop-blur-sm border border-primary/20
                          hover:border-primary/40 transition-all duration-500 hover:scale-105
-                         hover:shadow-[0_0_40px_hsl(var(--primary)/0.3)]"
+                         hover:shadow-[0_0_40px_hsl(var(--primary)/0.3)] scroll-reveal"
               style={{ animationDelay: `${index * 200}ms` }}
             >
               {/* Glow Effect */}

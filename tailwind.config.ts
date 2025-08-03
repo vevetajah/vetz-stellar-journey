@@ -123,6 +123,17 @@ export default {
 				'typing': {
 					'0%': { width: '0%' },
 					'100%': { width: '100%' }
+				},
+				'bounce-in': {
+					'0%': { transform: 'scale(0.3)', opacity: '0' },
+					'50%': { transform: 'scale(1.05)' },
+					'70%': { transform: 'scale(0.9)' },
+					'100%': { transform: 'scale(1)', opacity: '1' }
+				},
+				'skill-pulse': {
+					'0%': { transform: 'scale(1)', boxShadow: '0 0 0 0 hsl(var(--primary) / 0.7)' },
+					'70%': { transform: 'scale(1.1)', boxShadow: '0 0 0 10px hsl(var(--primary) / 0)' },
+					'100%': { transform: 'scale(1)', boxShadow: '0 0 0 0 hsl(var(--primary) / 0)' }
 				}
 			},
 			animation: {
@@ -134,7 +145,9 @@ export default {
 				'twinkle': 'twinkle 3s ease-in-out infinite',
 				'glitch': 'glitch 2s infinite',
 				'orbit': 'orbit 20s linear infinite',
-				'typing': 'typing 4s steps(40) infinite'
+				'typing': 'typing 4s steps(40) infinite',
+				'bounce-in': 'bounce-in 0.6s ease-out',
+				'skill-pulse': 'skill-pulse 2s infinite'
 			}
 		}
 	},

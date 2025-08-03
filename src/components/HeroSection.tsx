@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import profilePhoto from '@/assets/profile-photo.jpg';
 
 export const HeroSection = () => {
   const [displayText, setDisplayText] = useState('');
@@ -48,14 +49,27 @@ export const HeroSection = () => {
 
       {/* Main Content */}
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
+        {/* Profile Photo */}
+        <div className="mb-8 scroll-reveal">
+          <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 relative">
+            <img 
+              src={profilePhoto} 
+              alt="Vetz Profile" 
+              className="w-full h-full rounded-full object-cover border-4 border-primary/30 shadow-lg hover:scale-105 transition-transform duration-300"
+              style={{ boxShadow: '0 0 30px hsl(var(--primary) / 0.3)' }}
+            />
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 to-secondary/20 animate-pulse-glow"></div>
+          </div>
+        </div>
+
         <div className="relative">
-          <div className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
+          <div className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight scroll-reveal" style={{ animationDelay: '0.2s' }}>
             <h1 className="bg-gradient-to-r from-cyan-400 to-orange-400 bg-clip-text text-transparent">
               {displayText}
               <span className="animate-pulse text-primary">|</span>
             </h1>
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-8 bg-gradient-to-r from-cyan-400 to-orange-400 bg-clip-text text-transparent">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-8 bg-gradient-to-r from-cyan-400 to-orange-400 bg-clip-text text-transparent scroll-reveal" style={{ animationDelay: '0.4s' }}>
             {roleText}
           </h2>
           
